@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.ServoImplEx;
 
 public class Depollonator {
-    private final ServoImplEx depollonator;
+    private final Servo depollonator;
 
     private static final double up = 0;
     private static final double depollonate = 1.0;
@@ -14,8 +14,7 @@ public class Depollonator {
     private boolean isDown = false;
 
     public Depollonator(final HardwareMap hardwareMap, final String name) {
-        depollonator = hardwareMap.get(ServoImplEx.class, "depollonator");
-        depollonator.setPwmRange(new PwmControl.PwmRange(500, 2500));
+        depollonator = hardwareMap.get(Servo.class, "depollonator");
         depollonator.setPosition(up);
     }
 

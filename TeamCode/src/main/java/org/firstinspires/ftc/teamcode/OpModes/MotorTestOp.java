@@ -17,8 +17,8 @@ import com.seattlesolvers.solverslib.hardware.motors.Motor;
 @TeleOp(name = "MotorTestOp")
 public class MotorTestOp extends OpMode {
     private Motor rf, rr, lf, lr, intake, transfer, shooter_left, shooter_right;
-    private ServoImplEx depollonator;
-    private ServoImplEx shootblocker;
+    private Servo depollonator;
+    private Servo shootblocker;
 
     double positiona;
     double positionb;
@@ -29,15 +29,15 @@ public class MotorTestOp extends OpMode {
         rr = new Motor(hardwareMap, "rr", Motor.GoBILDA.RPM_435);
         lf = new Motor(hardwareMap, "lf", Motor.GoBILDA.RPM_435);
         lr = new Motor(hardwareMap, "lr", Motor.GoBILDA.RPM_435);
-        intake = new Motor(hardwareMap, "lr", Motor.GoBILDA.RPM_435);
-        transfer = new Motor(hardwareMap, "lr", Motor.GoBILDA.RPM_435);
-        shooter_left = new Motor(hardwareMap, "lr", Motor.GoBILDA.RPM_435);
-        shooter_right = new Motor(hardwareMap, "lr", Motor.GoBILDA.RPM_435);
-        depollonator = hardwareMap.get(ServoImplEx.class, "depollonator");
-        depollonator.setPwmRange(new PwmControl.PwmRange(500, 2500));
+        intake = new Motor(hardwareMap, "intake", Motor.GoBILDA.RPM_435);
+        transfer = new Motor(hardwareMap, "transfer", Motor.GoBILDA.RPM_435);
+        shooter_left = new Motor(hardwareMap, "shooterOne", Motor.GoBILDA.RPM_435);
+        shooter_right = new Motor(hardwareMap, "shooterTwo", Motor.GoBILDA.RPM_435);
+        depollonator = hardwareMap.get(Servo.class, "depollonator");
+        //depollonator.setPwmRange(new PwmControl.PwmRange(500, 2500));
         positiona = 0;
-        shootblocker = hardwareMap.get(ServoImplEx.class, "shootblocker");
-        shootblocker.setPwmRange(new PwmControl.PwmRange(500, 2500));
+        shootblocker = hardwareMap.get(Servo.class, "shootblocker");
+        //shootblocker.setPwmRange(new PwmControl.PwmRange(500, 2500));
         positionb = 0;
 
         rf.setRunMode(Motor.RunMode.VelocityControl);
@@ -55,7 +55,7 @@ public class MotorTestOp extends OpMode {
         final double drivetrain_velocity   = 1000;
         final double intake_velocity  = 2000;
         final double transfer_velocity = 2000;
-        final double shooter_velocity = 2000;
+        final double shooter_velocity = 2796;
 
         double direction = gamepad1.x ? -1.0 : 1.0;
 
@@ -73,16 +73,13 @@ public class MotorTestOp extends OpMode {
         if (gamepad1.dpad_up && gamepad1.dpad_left)    lf.set(direction * drivetrain_velocity);
         if (gamepad1.dpad_down && gamepad1.dpad_left)  lr.set(direction * drivetrain_velocity);
 
-        if (gamepad1.left_bumper)  intake.set(intake_velocity);
-        if (gamepad1.right_bumper) transfer.set(transfer_velocity);
+        if (gamepad1.left_bumper)  intake.set(intake_velocity * direction);
+        if (gamepad1.right_bumper) transfer.set(transfer_velocity * direction);
 
         if (gamepad1.left_trigger > 0.5)  shooter_left.set(direction * shooter_velocity);
         if (gamepad1.right_trigger > 0.5) shooter_right.set(direction * shooter_velocity);
-
-        positiona += -gamepad1.left_stick_y * 0.0005;
-        positiona = Range.clip(positiona, 0, 1);
-        depollonator.setPosition(positiona);
-
+        if (gamepad1.triangle){
+        depollonator.setPosition(0);}
         telemetry.addData("Position depollen", positiona);
         telemetry.addData("Position block", positionb);
         telemetry.update();

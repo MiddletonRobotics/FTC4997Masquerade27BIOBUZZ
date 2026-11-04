@@ -49,7 +49,7 @@ public class Controls {
     private final Trigger shooter;
     private final Trigger intakeModeToggle;
     private final Trigger depollonate;
-    private final Trigger openshooter;
+    private final Trigger toggleshooter;
 
     private boolean intakeDriver2 = false;
 
@@ -62,15 +62,15 @@ public class Controls {
         shooter = new Trigger(() -> driver1.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER)>0.5);
         intakeModeToggle = new Trigger(() -> driver1.getButton(GamepadKeys.Button.SQUARE));
         depollonate = new Trigger(() -> driver2.getButton(GamepadKeys.Button.TRIANGLE));
-        openshooter = new Trigger(() -> driver2.getButton(GamepadKeys.Button.CIRCLE));
+        toggleshooter = new Trigger(() -> driver2.getButton(GamepadKeys.Button.CIRCLE));
 
     }
     public void ControlMap() {
 
         intakeModeToggle.whenActive(new InstantCommand(() -> intakeDriver2 = !intakeDriver2));
         depollonate.whenActive(new InstantCommand(() -> robot.depollonator.toggle()));
-        openshooter.whenActive(new InstantCommand(() -> robot.depollonator.toggle()));
-        shooter.whileActiveContinuous(() -> robot.shooter.shoot(1))
+        toggleshooter.whenActive(new InstantCommand(() -> robot.shootblocker.toggle()));
+        shooter.whileActiveContinuous(() -> robot.shooter.shoot(500))
                 .whenInactive(() -> robot.shooter.shoot(0));
     }
     public void configureDefaultCommands () {
