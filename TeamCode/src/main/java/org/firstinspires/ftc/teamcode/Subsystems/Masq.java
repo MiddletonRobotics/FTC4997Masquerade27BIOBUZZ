@@ -15,7 +15,7 @@ public class Masq {
     public Masq(HardwareMap hardwareMap, Telemetry telemetry) {
         drivetrain = new Drivetrain(hardwareMap, "Drivetrain");
         intake = new Intake(hardwareMap, "Intake");
-        shooter = new Shooter(hardwareMap, "Shooter");
+        shooter = new Shooter(hardwareMap, "Shooter", telemetry);
         depollonator = new Depollonator(hardwareMap, "depollonator");
         shootblocker = new Shootblocker(hardwareMap, "shootblocker");
 

@@ -2,10 +2,11 @@ package org.firstinspires.ftc.teamcode.Subsystems;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.PwmControl;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.ServoImplEx;
 
 public class Shootblocker {
-    private final ServoImplEx shootblocker;
+    private final Servo shootblocker;
 
     private static final double open = 0;
     private static final double closed = 1.0;
@@ -13,14 +14,13 @@ public class Shootblocker {
     private boolean isClosed = false;
 
     public Shootblocker(final HardwareMap hardwareMap, final String name) {
-        shootblocker = hardwareMap.get(ServoImplEx.class, "shootblocker");
-        shootblocker.setPwmRange(new PwmControl.PwmRange(500, 2500));
+        shootblocker = hardwareMap.get(Servo.class, "shootblocker");
         shootblocker.setPosition(open);
     }
 
     public void toggle() {
         isClosed = !isClosed;
-        shootblocker.setPosition(isClosed ? closed : closed);
+        shootblocker.setPosition(isClosed ? open : closed);
     }
 
     public boolean isDown() {

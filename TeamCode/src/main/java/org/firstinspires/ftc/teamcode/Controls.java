@@ -70,8 +70,8 @@ public class Controls {
         intakeModeToggle.whenActive(new InstantCommand(() -> intakeDriver2 = !intakeDriver2));
         depollonate.whenActive(new InstantCommand(() -> robot.depollonator.toggle()));
         toggleshooter.whenActive(new InstantCommand(() -> robot.shootblocker.toggle()));
-        shooter.whileActiveContinuous(() -> robot.shooter.shoot(500))
-                .whenInactive(() -> robot.shooter.shoot(0));
+        shooter.whileActiveContinuous(() -> robot.shooter.shoot())
+                .whenInactive(() -> robot.shooter.stop());
     }
     public void configureDefaultCommands () {
         robot.drivetrain.setDefaultCommand(new drivetraincontroller(
