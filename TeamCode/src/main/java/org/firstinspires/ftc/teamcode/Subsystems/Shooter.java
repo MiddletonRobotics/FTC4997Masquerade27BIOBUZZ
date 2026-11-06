@@ -39,7 +39,8 @@ public class Shooter extends SubsystemBase {
 
     public void periodic() {
         double ticksPerSecond = shooter_right.getCorrectedVelocity();
-        double rpm = (ticksPerSecond / shooter_right.getCPR()) * 60;
+        double currentrpm = (ticksPerSecond / shooter_right.getCPR()) * 60;
+        telemetry.addData("Shooter RPM", currentrpm);
 
     }
 
@@ -51,8 +52,6 @@ public class Shooter extends SubsystemBase {
         shooter_left.setVelocity(ticksPerSec);
         shooter_right.setVelocity(ticksPerSec);
 
-        double currentrpm = (shooter_right.getVelocity() / shooter_right.getCPR()) * 60;
-        telemetry.addData("Shooter RPM", currentrpm);
     }
 
     public void stop() {

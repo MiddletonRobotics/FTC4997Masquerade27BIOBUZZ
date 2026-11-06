@@ -50,7 +50,11 @@ public class Controls {
     private final Trigger intakeModeToggle;
     private final Trigger depollonate;
     private final Trigger toggleshooter;
-    private final double shooter_rpm = 1000;
+    private double shooter_rpm = 1000;
+
+    private Trigger  shooterspeedup;
+    private Trigger  shooterspeeddown;
+
 
     private boolean intakeDriver2 = false;
 
@@ -64,6 +68,8 @@ public class Controls {
         intakeModeToggle = new Trigger(() -> driver1.getButton(GamepadKeys.Button.SQUARE));
         depollonate = new Trigger(() -> driver2.getButton(GamepadKeys.Button.TRIANGLE));
         toggleshooter = new Trigger(() -> driver2.getButton(GamepadKeys.Button.CIRCLE));
+        shooterspeedup = new Trigger(()-> driver2.getButton(GamepadKeys.Button.DPAD_UP));
+        shooterspeeddown = new Trigger(()-> driver2.getButton(GamepadKeys.Button.DPAD_DOWN));
 
     }
     public void ControlMap() {
@@ -71,11 +77,14 @@ public class Controls {
         intakeModeToggle.whenActive(new InstantCommand(() -> intakeDriver2 = !intakeDriver2));
         depollonate.whenActive(new InstantCommand(() -> robot.depollonator.toggle()));
         toggleshooter.whenActive(new InstantCommand(() -> robot.shootblocker.toggle()));
+        shooterspeedup.whenActive(new InstantCommand(()-> shooter_rpm = shooter_rpm + 25));
+        shooterspeeddown.whenActive(new InstantCommand(()-> shooter_rpm = shooter_rpm - 25));
         shooter.whileActiveContinuous(new StartEndCommand(
                 () -> robot.shooter.setVelocity(shooter_rpm),
                 () -> robot.shooter.stop(),
                 robot.shooter
         ));
+
     }
     public void configureDefaultCommands () {
         robot.drivetrain.setDefaultCommand(new drivetraincontroller(
