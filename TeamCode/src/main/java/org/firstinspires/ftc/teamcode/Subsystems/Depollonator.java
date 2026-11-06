@@ -9,7 +9,7 @@ public class Depollonator {
     private final Servo depollonator;
 
     private static final double up = 0.8;
-    private static final double depollonate = 0.1;
+    private static final double depollonate = 0.05;
 
     private boolean isDown = true;
 

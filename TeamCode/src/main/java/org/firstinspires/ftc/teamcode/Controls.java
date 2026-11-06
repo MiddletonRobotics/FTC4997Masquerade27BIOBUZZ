@@ -50,7 +50,7 @@ public class Controls {
     private final Trigger intakeModeToggle;
     private final Trigger depollonate;
     private final Trigger toggleshooter;
-    private final double shooter_rpm = 1500;
+    private final double shooter_rpm = 1000;
 
     private boolean intakeDriver2 = false;
 

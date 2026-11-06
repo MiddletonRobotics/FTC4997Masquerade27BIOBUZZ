@@ -8,8 +8,8 @@ import com.qualcomm.robotcore.hardware.ServoImplEx;
 public class Shootblocker {
     private final Servo shootblocker;
 
-    private static final double open = 0;
-    private static final double closed = 1.0;
+    private static final double open = 0.8;
+    private static final double closed = 0.95;
 
     private boolean isClosed = false;
 

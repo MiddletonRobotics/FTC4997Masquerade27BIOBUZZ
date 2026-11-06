@@ -14,11 +14,11 @@ public class Shooter extends SubsystemBase {
     private final Telemetry telemetry;
 
     // Default starting constants for velocity control (tune later as needed)
-    private static final double DEFAULT_KP = 0.5;
+    private static final double DEFAULT_KP = 0.0;
     private static final double DEFAULT_KI = 0.0;
     private static final double DEFAULT_KD = 0.0;
     private static final double DEFAULT_KS = 0.0;
-    private static final double DEFAULT_KV = 1.0;
+    private static final double DEFAULT_KV = 0.001;
 
     public Shooter(final HardwareMap hMap, final String name, Telemetry telemetry) {
         shooter_left = new MotorEx(hMap, "shooterOne", Motor.GoBILDA.BARE);
@@ -41,7 +41,6 @@ public class Shooter extends SubsystemBase {
         double ticksPerSecond = shooter_right.getCorrectedVelocity();
         double rpm = (ticksPerSecond / shooter_right.getCPR()) * 60;
 
-        telemetry.addData("Shooter RPM", rpm);
     }
 
     public void setVelocity(double rpm) {
@@ -51,6 +50,9 @@ public class Shooter extends SubsystemBase {
         double ticksPerSec = (rpm * shooter_right.getCPR()) / 60.0;
         shooter_left.setVelocity(ticksPerSec);
         shooter_right.setVelocity(ticksPerSec);
+
+        double currentrpm = (shooter_right.getVelocity() / shooter_right.getCPR()) * 60;
+        telemetry.addData("Shooter RPM", currentrpm);
     }
 
     public void stop() {
