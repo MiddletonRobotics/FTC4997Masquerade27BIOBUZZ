@@ -37,7 +37,7 @@ public class Constants {
         c.globalDistanceUnit.set(DistanceUnit.INCH);
         c.offsetUnits.set(DistanceUnit.INCH);
     });
-    public static ForesightConfig foresightConfig = new ForesightConfig(
+        public static ForesightConfig foresightConfig = new ForesightConfig(
             c -> {
                 Controller primaryTranslationalForward = Controller.proportional(0.670929834452962);
                 Controller secondaryTranslationalForward = Controller.proportional(0.247890646255016);
@@ -62,11 +62,12 @@ public class Constants {
                 c.naturalStrafeDeceleration.set(46.216462207466115);
             }
     );
+
     public static Follower create(HardwareMap h) {
         return new Follower(
-                new PinpointLocalizer(h, localizerConfig),
-                new Mecanum(h, drivetrainConfig),
-                new Foresight(foresightConfig)
+                new PinpointLocalizer(h, Constants.localizerConfig),
+                new Mecanum(h, Constants.drivetrainConfig),
+                new Foresight(Constants.foresightConfig)
         );
     }
 }

@@ -50,6 +50,7 @@ public class Controls {
     private final Trigger intakeModeToggle;
     private final Trigger depollonate;
     private final Trigger toggleshooter;
+    private final double shooter_rpm = 1000;
 
     private boolean intakeDriver2 = false;
 
@@ -70,8 +71,11 @@ public class Controls {
         intakeModeToggle.whenActive(new InstantCommand(() -> intakeDriver2 = !intakeDriver2));
         depollonate.whenActive(new InstantCommand(() -> robot.depollonator.toggle()));
         toggleshooter.whenActive(new InstantCommand(() -> robot.shootblocker.toggle()));
-        shooter.whileActiveContinuous(() -> robot.shooter.shoot())
-                .whenInactive(() -> robot.shooter.stop());
+        shooter.whileActiveContinuous(new StartEndCommand(
+                () -> robot.shooter.setVelocity(shooter_rpm),
+                () -> robot.shooter.stop(),
+                robot.shooter
+        ));
     }
     public void configureDefaultCommands () {
         robot.drivetrain.setDefaultCommand(new drivetraincontroller(

@@ -8,10 +8,10 @@ import com.qualcomm.robotcore.hardware.ServoImplEx;
 public class Depollonator {
     private final Servo depollonator;
 
-    private static final double up = 0;
-    private static final double depollonate = 1.0;
+    private static final double up = 0.8;
+    private static final double depollonate = 0.05;
 
-    private boolean isDown = false;
+    private boolean isDown = true;
 
     public Depollonator(final HardwareMap hardwareMap, final String name) {
         depollonator = hardwareMap.get(Servo.class, "depollonator");
@@ -19,8 +19,8 @@ public class Depollonator {
     }
 
     public void toggle() {
-        isDown = !isDown;
         depollonator.setPosition(isDown ? depollonate : up);
+        isDown = !isDown;
     }
 
     public boolean isDown() {
