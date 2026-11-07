@@ -40,15 +40,15 @@ public class intakecontroller extends CommandBase {
             transferPower = rollers;
         } else {
             intakePower = 0;
-            if (driver2.getButton(GamepadKeys.Button.RIGHT_BUMPER)) {
+            if (driver2.getButton(GamepadKeys.Button.DPAD_UP)) {
                 intakePower = 1;
-            } else if (driver2.getButton(GamepadKeys.Button.LEFT_BUMPER)) {
+            } else if (driver2.getButton(GamepadKeys.Button.DPAD_DOWN)) {
                 intakePower = -1;
             }
             transferPower = 0;
-            if (driver2.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER) > 0.5) {
+            if (driver2.getButton(GamepadKeys.Button.DPAD_LEFT)) {
                 transferPower = 1;
-            } else if (driver2.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER) > 0.5) {
+            } else if (driver2.getButton(GamepadKeys.Button.DPAD_RIGHT)) {
                 transferPower = -1;
             }
         }

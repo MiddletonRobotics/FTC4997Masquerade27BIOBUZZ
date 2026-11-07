@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.Subsystems;
 
+import com.acmerobotics.dashboard.FtcDashboard;
+import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -13,11 +15,13 @@ public class Masq {
 
 
     public Masq(HardwareMap hardwareMap, Telemetry telemetry) {
+        Telemetry telem = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         drivetrain = new Drivetrain(hardwareMap, "Drivetrain");
         intake = new Intake(hardwareMap, "Intake");
-        shooter = new Shooter(hardwareMap, "Shooter", telemetry);
         depollonator = new Depollonator(hardwareMap, "depollonator");
         shootblocker = new Shootblocker(hardwareMap, "shootblocker");
+        shooter = new Shooter(hardwareMap, "shooter", telem);
+
 
     }
 
