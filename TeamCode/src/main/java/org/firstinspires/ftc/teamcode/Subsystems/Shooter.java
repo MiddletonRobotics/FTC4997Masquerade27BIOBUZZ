@@ -35,24 +35,28 @@ public class Shooter extends SubsystemBase {
         }
     }
 
-    public static Profile[] profiles = {
-            new Profile(1250,  0.5, 0, 2),
-            new Profile(1500,  0.5, 0, 0.1)
-    };
+  //  public static Profile[] profiles = {
+   //         new Profile(1250,  0.5, 0, 2),
+   //         new Profile(1500,  0.5, 0, 0.1)
+ //   };
 
     private double targetRpm = 0;
 
+
+    public void shooterspeedup () {
+
+    }
     public void setVelocity(double rpm) {
-        Profile p = null;
-        for (Profile c : profiles) if (c.rpm == rpm) p = c;
-        if (p == null) p = profiles[0];
+//        Profile p = null;
+  //      for (Profile c : profiles) if (c.rpm == rpm) p = c;
+    //    if (p == null) p = profiles[0];
 
         shooter_left.setRunMode(Motor.RunMode.VelocityControl);
         shooter_right.setRunMode(Motor.RunMode.VelocityControl);
-        shooter_left.setVeloCoefficients(p.kP, 0, 0);
-        shooter_right.setVeloCoefficients(p.kP, 0, 0);
-        shooter_left.setFeedforwardCoefficients(p.kS, p.kV);
-        shooter_right.setFeedforwardCoefficients(p.kS, p.kV);
+      //  shooter_left.setVeloCoefficients(p.kP, 0, 0);
+    //    shooter_right.setVeloCoefficients(p.kP, 0, 0);
+  //      shooter_left.setFeedforwardCoefficients(p.kS, p.kV);
+//        shooter_right.setFeedforwardCoefficients(p.kS, p.kV);
         targetRpm = rpm;
     }
 

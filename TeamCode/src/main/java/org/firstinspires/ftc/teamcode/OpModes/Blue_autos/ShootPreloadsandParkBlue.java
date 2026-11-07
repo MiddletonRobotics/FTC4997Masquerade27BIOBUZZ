@@ -24,7 +24,7 @@ import org.firstinspires.ftc.teamcode.Subsystems.Shooter;
 @Autonomous(name = "ShootPreloadsandParkBlue")
 public class ShootPreloadsandParkBlue extends OpMode {
     private static final double TARGET_RPM = 1000;
-    private static final double FEED_TIME_MS = 3000;
+    private static final double FEED_TIME_MS = 5000;
     private static final double SPINUP_TIMEOUT = 10000;
 
     private Follower follower;
@@ -35,8 +35,8 @@ public class ShootPreloadsandParkBlue extends OpMode {
 
     private final PoseFactory p = PoseFactory.degrees();
     private final Pose startPose = p.of(56, 9, 270);
-    private final Pose shootPose = p.of(56, 10, 270);
-    private final Pose parkPose  = p.of(9.5, 100, 0);
+    private final Pose shootPose = p.of(9.5, 10, 270);
+    private final Pose parkPose  = p.of(9.5, 100, 270);
 
     private Path startToShoot() {
         return line(startPose, shootPose).linear(startPose, shootPose);
@@ -71,7 +71,7 @@ public class ShootPreloadsandParkBlue extends OpMode {
                 instant(() -> { intake.setPower(0); transfer.setPower(0); }),
                 instant(this::shooterStop),
 
-                follow(follower, shootToPark())
+                follow(follower,     shootToPark())
         );
     }
 
@@ -79,10 +79,10 @@ public class ShootPreloadsandParkBlue extends OpMode {
     public void init() {
         Scheduler.reset();
 
-        intake = hardwareMap.get(DcMotorEx.class, "intake");
+        intake = hardwareMap.get(DcMotorEx.class,  "intake");
         transfer = hardwareMap.get(DcMotorEx.class, "transfer");
         shooter_left = new MotorEx(hardwareMap, "shooterOne", Motor.GoBILDA.BARE);
-        shooter_right = new MotorEx(hardwareMap, "shooterOne", Motor.GoBILDA.BARE);
+        shooter_right = new MotorEx(hardwareMap, "shooterTwo", Motor.GoBILDA.BARE);
 
 
         follower = Constants.create(hardwareMap);

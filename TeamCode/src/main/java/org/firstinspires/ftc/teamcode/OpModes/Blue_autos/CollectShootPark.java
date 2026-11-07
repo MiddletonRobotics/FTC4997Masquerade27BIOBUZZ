@@ -21,8 +21,8 @@ import com.seattlesolvers.solverslib.hardware.motors.MotorEx;
 
 import org.firstinspires.ftc.teamcode.pedro.Constants;
 
-@Autonomous(name = "ShootPreloadsandParkBlue")
-public class CollectShootPark extends OpMode {
+//@Autonomous(name = "ShootPreloadsandParkBlue")
+//public class CollectShootPark extends OpMode {
     /*
     private static final double TARGET_RPM = 1000;
 
@@ -112,4 +112,4 @@ public class CollectShootPark extends OpMode {
         telemetry.update();
     }
      */
-}
+//}

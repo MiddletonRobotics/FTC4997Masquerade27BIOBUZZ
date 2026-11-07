@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.OpModes.Blue_autos;
 
 import static com.pedropathing.api.Paths.*;
 import com.pedropathing.api.Paths;
@@ -15,6 +15,8 @@ import static com.pedropathing.ivy.groups.Groups.sequential;
 import static com.pedropathing.ivy.pedro.PedroCommands.follow;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+
+import org.firstinspires.ftc.teamcode.pedro.Constants;
 
 @Autonomous(name = "ParkTopBlue", group = "Autonomous")
 public class ParkTopBlue extends LinearOpMode {

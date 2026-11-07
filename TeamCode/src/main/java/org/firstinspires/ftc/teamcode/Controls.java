@@ -55,7 +55,6 @@ public class Controls {
     private double shooter_rpm_pollon = 1250;
     private double shooter_rpm_nectar = 2000;
 
-
     private Trigger  shooterspeedup;
     private Trigger  shooterspeeddown;
 
@@ -71,17 +70,20 @@ public class Controls {
         shooterpollon = new Trigger(() -> driver2.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER)>0.5);
         shooternectar = new Trigger(() -> driver2.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER)>0.5);
         intakeModeToggle = new Trigger(() -> driver1.getButton(GamepadKeys.Button.SQUARE));
-        depollonate = new Trigger(() -> driver2.getButton(GamepadKeys.Button.TRIANGLE));
-        toggleshooter = new Trigger(() -> driver2.getButton(GamepadKeys.Button.CIRCLE));
-
+        depollonate = new Trigger(() -> driver2.getButton(GamepadKeys.Button.DPAD_LEFT));
+        toggleshooter = new Trigger(() -> driver2.getButton(GamepadKeys.Button.DPAD_RIGHT));
+        shooterspeedup = new Trigger(()-> driver2.getButton(GamepadKeys.Button.DPAD_UP));
+        shooterspeeddown = new Trigger(()-> driver2.getButton(GamepadKeys.Button.DPAD_DOWN));
     }
     public void ControlMap() {
 
         intakeModeToggle.whenActive(new InstantCommand(() -> intakeDriver2 = !intakeDriver2));
         depollonate.whenActive(new InstantCommand(() -> robot.depollonator.toggle()));
         toggleshooter.whenActive(new InstantCommand(() -> robot.shootblocker.toggle()));
-        //shooterspeedup.whenActive(new InstantCommand(()-> shooter_rpm = shooter_rpm + 25));
-        //shooterspeeddown.whenActive(new InstantCommand(()-> shooter_rpm = shooter_rpm - 25));
+        shooterspeedup.whenActive(new InstantCommand(()-> shooter_rpm_nectar = shooter_rpm_nectar + 100)
+                .alongWith(new InstantCommand(()-> shooter_rpm_pollon = shooter_rpm_pollon + 100)));
+        shooterspeeddown.whenActive(new InstantCommand(()-> shooter_rpm_pollon = shooter_rpm_pollon - 100)
+                .alongWith(new InstantCommand(()->shooter_rpm_nectar = shooter_rpm_nectar - 100)));
         shooterpollon.whileActiveContinuous(new StartEndCommand(
                 () -> robot.shooter.setVelocity(shooter_rpm_pollon),
                 () -> robot.shooter.stop(),
@@ -92,7 +94,6 @@ public class Controls {
                 () -> robot.shooter.stop(),
                 robot.shooter
         ));
-
     }
     public void configureDefaultCommands () {
         robot.drivetrain.setDefaultCommand(new drivetraincontroller(

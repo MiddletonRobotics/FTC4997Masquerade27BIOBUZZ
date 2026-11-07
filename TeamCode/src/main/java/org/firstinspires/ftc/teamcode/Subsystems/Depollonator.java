@@ -8,8 +8,8 @@ import com.qualcomm.robotcore.hardware.ServoImplEx;
 public class Depollonator {
     private final Servo depollonator;
 
-    private static final double up = 0.8;
-    private static final double depollonate = 0.05;
+    private static final double up = 0.9;
+    private static final double depollonate = 0.1;
 
     private boolean isDown = true;
 

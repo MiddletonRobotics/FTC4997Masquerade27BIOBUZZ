@@ -14,6 +14,8 @@ import static com.pedropathing.ivy.pedro.PedroCommands.follow;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import org.firstinspires.ftc.teamcode.pedro.Constants;
+
 @Autonomous(name = "ShootCurveParkBottomRed", group = "Autonomous")
 public class ShootCurveParkBottomRed extends LinearOpMode {
 
@@ -21,8 +23,8 @@ public class ShootCurveParkBottomRed extends LinearOpMode {
 
     private final PoseFactory poseFactory = PoseFactory.degrees();
 
-    private final Pose start = poseFactory.of(56, 8, 90);
-    private final Pose path1 = poseFactory.of(56, 36, 180);
+    private final Pose start = poseFactory.of(56, 9, 90);
+    private final Pose path1 = poseFactory.of(56, 10, 180);
     private final Pose point2 = poseFactory.of(15.0674, 122.1972, 91.2623);
     private final Pose point2Control1 = poseFactory.of(16.8588, 40.8988, 0);
 

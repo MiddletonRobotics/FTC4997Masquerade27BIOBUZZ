@@ -16,21 +16,24 @@ public class drivetraincontroller extends CommandBase {
     private final DoubleSupplier d_strafe;
 
     public drivetraincontroller(
-            Drivetrain subsystem, DoubleSupplier forward, DoubleSupplier rotation, DoubleSupplier strafe) {
+            Drivetrain subsystem,
+            DoubleSupplier forward,
+            DoubleSupplier rotation,
+            DoubleSupplier strafe) {
         drivetrain = subsystem;
-        d_forward = strafe;
+        d_forward = forward;
         d_rotation = rotation;
-        d_strafe = forward;
+        d_strafe = strafe;
 
         addRequirements(drivetrain);
     }
 
     @Override
     public void execute() {
-        drivetrain.driveFieldCentric(
+        drivetrain.drive(
+                d_strafe.getAsDouble(),
                 d_forward.getAsDouble(),
-                -d_strafe.getAsDouble(),
-                -d_rotation.getAsDouble()
+                d_rotation.getAsDouble()
         );
     }
 }
