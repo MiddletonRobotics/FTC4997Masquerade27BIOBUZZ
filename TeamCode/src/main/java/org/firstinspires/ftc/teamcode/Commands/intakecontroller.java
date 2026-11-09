@@ -1,5 +1,5 @@
 package org.firstinspires.ftc.teamcode.Commands;
-
+/*
 import com.seattlesolvers.solverslib.command.CommandBase;
 import com.seattlesolvers.solverslib.gamepad.GamepadEx;
 import com.seattlesolvers.solverslib.gamepad.GamepadKeys;
@@ -57,3 +57,4 @@ public class intakecontroller extends CommandBase {
         intake.setTransfer(transferPower);
     }
 }
+*/

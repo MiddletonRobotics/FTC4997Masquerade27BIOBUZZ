@@ -1,18 +1,18 @@
 package org.firstinspires.ftc.teamcode.Subsystems;
 
 import com.acmerobotics.dashboard.config.Config;
+import com.bylazar.ftcontrol.panels.configurables.annotations.Configurable;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.seattlesolvers.solverslib.command.SubsystemBase;
 import com.seattlesolvers.solverslib.hardware.motors.Motor;
 import com.seattlesolvers.solverslib.hardware.motors.MotorEx;
-
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 @Config
+@Configurable
 public class Shooter extends SubsystemBase {
     private final MotorEx shooter_left;
     private final MotorEx shooter_right;
-
     private final Telemetry telemetry;
 
 
@@ -29,16 +29,21 @@ public class Shooter extends SubsystemBase {
     }
 
     private static class Profile {
-        final double rpm, kP, kS, kV;
-        Profile(double rpm, double kP, double kS, double kV) {
-            this.rpm = rpm; this.kP = kP; this.kS = kS; this.kV = kV;
+        final double rpm, kPL, kSL, kVL, kPR, kSR, kVR;
+        Profile(double rpm, double kPL, double kSL, double kVL, double kPR, double kSR, double kVR) {
+            this.rpm = rpm; this.kPL = kPL; this.kSL = kSL; this.kVL = kVL; this.kPR = kPR; this.kSR = kSR; this.kVR = kVR;
         }
     }
 
-  //  public static Profile[] profiles = {
-   //         new Profile(1250,  0.5, 0, 2),
-   //         new Profile(1500,  0.5, 0, 0.1)
-  //  };
+    public static Profile[] tuningValues = {
+            new Profile(1150,  0.5, 0, 2, 0.5, 0, 2),
+            new Profile(1250,  0.5, 0, 2, 0.5, 0, 2),
+            new Profile(1350,  0.5, 0, 2, 0.5, 0, 2),
+
+            new Profile(1400,  0.5, 0, 0.1, 0.5, 0, 0.1),
+            new Profile(1500,  0.5, 0, 0.1, 0.5, 0, 0.1),
+            new Profile(1600,  0.5, 0, 0.1, 0.5, 0, 0.1),
+    };
 
     private double targetRpm = 0;
 
@@ -47,16 +52,15 @@ public class Shooter extends SubsystemBase {
 
     }
     public void setVelocity(double rpm) {
-//        Profile p = null;
-  //      for (Profile c : profiles) if (c.rpm == rpm) p = c;
-    //    if (p == null) p = profiles[0];
+        Profile shootercoeff = null;
+        for (Profile eachprofile : tuningValues) if (eachprofile.rpm == rpm) shootercoeff = eachprofile;
 
         shooter_left.setRunMode(Motor.RunMode.VelocityControl);
         shooter_right.setRunMode(Motor.RunMode.VelocityControl);
-      //  shooter_left.setVeloCoefficients(p.kP, 0, 0);
-    //    shooter_right.setVeloCoefficients(p.kP, 0, 0);
-  //      shooter_left.setFeedforwardCoefficients(p.kS, p.kV);
-//        shooter_right.setFeedforwardCoefficients(p.kS, p.kV);
+        shooter_left.setVeloCoefficients(shootercoeff.kPL, 0, 0);
+        shooter_right.setVeloCoefficients(shootercoeff.kPR, 0, 0);
+        shooter_left.setFeedforwardCoefficients(shootercoeff.kSL, shootercoeff.kVL);
+        shooter_right.setFeedforwardCoefficients(shootercoeff.kSR, shootercoeff.kVR);
         targetRpm = rpm;
     }
 

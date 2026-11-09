@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.OpModes.Autos;
 
 import com.pedropathing.api.Paths;
 
@@ -16,21 +16,23 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.pedro.Constants;
 
-@Autonomous(name = "ParkBottomRed", group = "Autonomous")
-public class ParkBottomRed extends LinearOpMode {
+@Autonomous(name = "ShootCurveParkBottom", group = "Autonomous")
+public class ShootCurveParkBottom extends LinearOpMode {
 
     private Follower follower;
 
     private final PoseFactory poseFactory = PoseFactory.degrees();
 
-    private final Pose start = poseFactory.of(53.3764, 12.0229, 90);
-    private final Pose path1 = poseFactory.of(12.623, 122.754, 180);
-    private final Pose path1Control1 = poseFactory.of(18.2659, 54.7787, 0);
+    private final Pose start = poseFactory.of(56, 9, 90);
+    private final Pose path1 = poseFactory.of(56, 10, 180);
+    private final Pose point2 = poseFactory.of(15.0674, 122.1972, 91.2623);
+    private final Pose point2Control1 = poseFactory.of(16.8588, 40.8988, 0);
 
     // Autonomous routine
     public Command autoRoutine() {
         return sequential(
-                follow(follower, path1())
+                follow(follower, path1()),
+                follow(follower, path2())
         );
     }
 
@@ -62,6 +64,10 @@ public class ParkBottomRed extends LinearOpMode {
     }
 
     public Path path1() {
-        return Paths.curve(start, path1Control1, path1).linear(start, path1);
+        return Paths.line(start, path1).linear(start, path1);
+    }
+
+    public Path path2() {
+        return Paths.curve(path1, point2Control1, point2).tangent();
     }
 }

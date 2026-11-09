@@ -37,3 +37,18 @@ repositories {
         url "https://repo.dairy.foundation/releases"
     }
 }
+android {
+    namespace = 'org.firstinspires.ftc.teamcode'
+
+    //ADD THIS
+    compileSdk 35
+
+    defaultConfig {
+        minSdk 24
+    }
+    //
+
+    packagingOptions {
+        jniLibs.useLegacyPackaging true
+    }
+}
