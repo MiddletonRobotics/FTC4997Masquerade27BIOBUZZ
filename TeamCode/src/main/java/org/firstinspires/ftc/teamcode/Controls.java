@@ -49,7 +49,12 @@ public class Controls {
     private final Trigger shooterpollon;
     private final Trigger shooternectar;
 
-    private final Trigger intakeModeToggle;
+   // private final Trigger intakeModeToggle;
+    private final Trigger intake;
+    private final Trigger outtake;
+    private final Trigger transferin;
+    private final Trigger transferout;
+
     private final Trigger depollonate;
     private final Trigger toggleshooter;
     private double shooter_rpm_pollon = 1250;
@@ -69,7 +74,11 @@ public class Controls {
 
         shooterpollon = new Trigger(() -> driver2.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER)>0.5);
         shooternectar = new Trigger(() -> driver2.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER)>0.5);
-        intakeModeToggle = new Trigger(() -> driver1.getButton(GamepadKeys.Button.SQUARE));
+       // intakeModeToggle = new Trigger(() -> driver1.getButton(GamepadKeys.Button.SQUARE));
+        intake = new Trigger(() -> driver1.getButton(GamepadKeys.Button.RIGHT_BUMPER));
+        outtake = new Trigger(() -> driver1.getButton(GamepadKeys.Button.LEFT_BUMPER));
+        transferin = new Trigger(() -> driver2.getButton(GamepadKeys.Button.CROSS));
+        transferout = new Trigger(() -> driver2.getButton(GamepadKeys.Button.TRIANGLE));
         depollonate = new Trigger(() -> driver2.getButton(GamepadKeys.Button.DPAD_LEFT));
         toggleshooter = new Trigger(() -> driver2.getButton(GamepadKeys.Button.DPAD_RIGHT));
         shooterspeedup = new Trigger(()-> driver2.getButton(GamepadKeys.Button.DPAD_UP));
@@ -77,7 +86,7 @@ public class Controls {
     }
     public void ControlMap() {
 
-        intakeModeToggle.whenActive(new InstantCommand(() -> intakeDriver2 = !intakeDriver2));
+       // intakeModeToggle.whenActive(new InstantCommand(() -> intakeDriver2 = !intakeDriver2));
         depollonate.whenActive(new InstantCommand(() -> robot.depollonator.toggle()));
         toggleshooter.whenActive(new InstantCommand(() -> robot.shootblocker.toggle()));
         shooterspeedup.whenActive(new InstantCommand(()-> shooter_rpm_nectar = shooter_rpm_nectar + 100)
@@ -94,6 +103,26 @@ public class Controls {
                 () -> robot.shooter.stop(),
                 robot.shooter
         ));
+        intake.whileActiveContinuous(new StartEndCommand(
+                ()-> robot.intake.setIntake(1),
+                ()-> robot.intake.setIntake(0),
+                robot.intake
+        ));
+        outtake.whileActiveContinuous(new StartEndCommand(
+                ()-> robot.intake.setIntake(-1),
+                ()-> robot.intake.setIntake(0),
+                robot.intake
+        ));
+        transferin.whileActiveContinuous(new StartEndCommand(
+                ()-> robot.intake.setTransfer(1),
+                ()-> robot.intake.setTransfer(0),
+                robot.intake
+        ));
+        transferout.whileActiveContinuous(new StartEndCommand(
+                ()-> robot.intake.setTransfer(-1),
+                ()-> robot.intake.setTransfer(0),
+                robot.intake
+        ));
     }
     public void configureDefaultCommands () {
         robot.drivetrain.setDefaultCommand(new drivetraincontroller(
@@ -102,10 +131,10 @@ public class Controls {
                 () -> driver1.getRightX(),
                 () -> driver1.getLeftX()
         ));
-        robot.intake.setDefaultCommand(new intakecontroller(
-                robot.intake, driver1, driver2,
-                () -> intakeDriver2
-        ));
+       // robot.intake.setDefaultCommand(new intakecontroller(
+      //          robot.intake, driver1, driver2,
+       //         () -> intakeDriver2
+      //  ));
 
 }
 }

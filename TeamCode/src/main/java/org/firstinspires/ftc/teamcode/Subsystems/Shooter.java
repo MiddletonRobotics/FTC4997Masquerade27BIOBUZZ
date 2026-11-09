@@ -38,7 +38,7 @@ public class Shooter extends SubsystemBase {
   //  public static Profile[] profiles = {
    //         new Profile(1250,  0.5, 0, 2),
    //         new Profile(1500,  0.5, 0, 0.1)
- //   };
+  //  };
 
     private double targetRpm = 0;
 
