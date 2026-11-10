@@ -1,13 +1,13 @@
 package org.firstinspires.ftc.teamcode.Subsystems;
 
+
 import com.acmerobotics.dashboard.config.Config;
-import com.bylazar.ftcontrol.panels.configurables.annotations.Configurable;
+import com.bylazar.configurables.annotations.Configurable;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.seattlesolvers.solverslib.command.SubsystemBase;
 import com.seattlesolvers.solverslib.hardware.motors.Motor;
 import com.seattlesolvers.solverslib.hardware.motors.MotorEx;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-
 @Config
 @Configurable
 public class Shooter extends SubsystemBase {

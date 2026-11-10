@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode.pedro;
 
 import com.acmerobotics.dashboard.config.Config;
-import com.bylazar.ftcontrol.panels.configurables.annotations.Configurable;
+import com.bylazar.configurables.annotations.Configurable;
 import com.pedropathing.algorithm.Foresight;
 import com.pedropathing.algorithm.ForesightConfig;
 import com.pedropathing.controllers.Controller;
