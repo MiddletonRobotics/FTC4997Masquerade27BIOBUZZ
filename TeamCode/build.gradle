@@ -68,7 +68,8 @@ dependencies {
 
     // Pedro Pathing
     implementation 'com.pedropathing:revhub:3.0.2'
-    implementation 'com.pedropathing:tuning:1.0.2' // AutoTune (see Tuning.java)
+    implementation 'com.pedropathing:tuning:1.0.1' // AutoTune (see Tuning.java)
+    implementation 'com.pedropathing.ivy:pedro:1.1.1'
 
     // Panels Dashboard
     implementation "com.bylazar:fullpanels:1.0.19"

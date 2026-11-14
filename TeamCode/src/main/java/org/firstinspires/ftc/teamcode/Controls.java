@@ -57,7 +57,7 @@ public class Controls {
     private final Trigger depollonate;
     private final Trigger toggleshooter;
     private double shooter_rpm_pollon = 1250;
-    private double shooter_rpm_nectar = 2000;
+    private double shooter_rpm_nectar = 1500;
 
     private Trigger  shooterspeedup;
     private Trigger  shooterspeeddown;

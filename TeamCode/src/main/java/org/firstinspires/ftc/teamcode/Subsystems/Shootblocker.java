@@ -8,19 +8,19 @@ import com.qualcomm.robotcore.hardware.ServoImplEx;
 public class Shootblocker {
     private final Servo shootblocker;
 
-    private static final double open = 0.8;
+    private static final double open = 0.75;
     private static final double closed = 0.95;
 
-    private boolean isClosed = false;
+    private boolean isClosed = true;
 
     public Shootblocker(final HardwareMap hardwareMap, final String name) {
         shootblocker = hardwareMap.get(Servo.class, "shootblocker");
-        shootblocker.setPosition(open);
+        shootblocker.setPosition(closed);
     }
 
     public void toggle() {
         isClosed = !isClosed;
-        shootblocker.setPosition(isClosed ? open : closed);
+        shootblocker.setPosition(isClosed ? closed : open);
     }
 
     public boolean isDown() {

@@ -14,8 +14,6 @@ public class Intake extends SubsystemBase {
         intake = new Motor(hardwareMap, "intake", Motor.GoBILDA.RPM_312);
         transfer = new Motor(hardwareMap, "transfer", Motor.GoBILDA.RPM_312);
 
-        intake.setInverted(true);
-
 
         intake.setRunMode(Motor.RunMode.RawPower);
         transfer.setRunMode(Motor.RunMode.RawPower);

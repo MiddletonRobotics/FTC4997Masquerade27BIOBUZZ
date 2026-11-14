@@ -20,16 +20,18 @@ import org.firstinspires.ftc.teamcode.pedro.Constants;
 @Autonomous(name = "ShootPreloadsandPark")
 public class ShootPreloadsandPark extends CommandOpMode {
     private Follower follower;
-    private final Masq robot = new Masq(hardwareMap, telemetry);
+    private Masq robot;
 
 
     @Override
     public void initialize() {
         follower = Constants.create(hardwareMap);
+        robot = new Masq(hardwareMap, telemetry);
+
         follower.setPose(Pose.zero());
 
-        Path leftaftershot = line(Pose.zero(), new Pose(0, 24, 0)).constant(0);
-        Path park = line(new Pose(0, 24, 0), new Pose(101, 24, 0)).constant(0);
+        Path leftaftershot = line(Pose.zero(), new Pose(0, -24, 0)).constant(0);
+        Path park = line(new Pose(0, -24, 0), new Pose(-101, -24, 0)).constant(0);
 
         schedule(new SequentialCommandGroup(
                 new InstantCommand(()-> robot.shooter.setVelocity(1200)),
